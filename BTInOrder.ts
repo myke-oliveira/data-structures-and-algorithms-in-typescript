@@ -1,9 +1,15 @@
+function walk(node: BinaryNode<number> | null, path: number[]): number[] {
+    if (!node) {
+        return path
+    }
+
+    walk(node.left, path)
+    path.push(node.value)
+    walk(node.right, path)
+
+    return path
+}
+
 export default function in_order_search(head: BinaryNode<number>): number[] {
-    const output: number[] = []
-
-    if (head.left) output.push(...in_order_search(head.left))
-    output.push(head.value)
-    if (head.right) output.push(...in_order_search(head.right))
-
-    return output
+    return walk(head, [])
 }
